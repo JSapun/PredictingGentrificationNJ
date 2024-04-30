@@ -1,0 +1,20 @@
+
+
+39 towns in morris county, --> 20x39=780 image pairs for decent exposure for each neighbourhood
+
+
+manualTrainingSetSelection --> Obtaining and classifying Streetview images (random sample obtained in Morris County)
+SemanticSegmentation --> Running a SemSeg model to assign class (object) labels to every single pixel of an image
+CompareVis --> Get numerical analysis of semantic segmentation pairs and create KNN classification model
+MorrisCountyImages --> Sample Selection of Morris County images to run classification model on to observe changes
+BPS --> Data cleaning of BPS dataset
+CensusScrap --> Data cleaning of Census dataset
+GreenSpace --> Data cleaning of Green Space dataset
+Everything --> Combination of all cleaned datasets to run final clustering model on to predict Gentrification
+
+Data --> Datasets can be found here
+Figures --> Output from python files (plots, tables, etc)
+imgSamples --> Good streetview image samples for report
+
+Old --> Old implementation of project
+

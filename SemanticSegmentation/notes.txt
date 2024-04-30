@@ -1,0 +1,6 @@
+To Get Started:
+    - Get demo_test.sh to run and get test model
+    - Fix collections.mapping to collections.abc.mapping
+    - Run Command:
+	./venv/Scripts/activate --> activate embedded virtual environment
+        python -u test.py --imgs Imgs/bad/jpg/ --gpu 0 --cfg config/ade20k-resnet50dilated-ppm_deepsup.yaml

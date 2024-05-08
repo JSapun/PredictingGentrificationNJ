@@ -9,7 +9,7 @@ from tqdm import tqdm
 def validate(df):
     meta_base = 'https://maps.googleapis.com/maps/api/streetview/metadata?'
     api_key = open("../MapsAPI_Key.txt", "r").read()
-    morris_df = df.copy().sample(300)  # 100 samples per town
+    morris_df = df.copy().sample(300)  # 300 samples per town
 
     add_df = morris_df["ADDRESS"]
     town_df = morris_df["POST_COMM"]

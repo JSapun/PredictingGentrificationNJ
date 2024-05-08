@@ -4,7 +4,7 @@ import fiona
 def save_new_files(county: str):
     """
     This function simply opens the main source file and outputs a smaller version
-    * File opens as gdb but saves as GeoJson
+    * File opens as GeoDatabase but saves as GeoPackage
     """
     GDB_Path = '../Data/greenSpace.gdb'
     #fiona.listlayers(GDB_Path)

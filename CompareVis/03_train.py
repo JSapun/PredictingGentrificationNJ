@@ -1,4 +1,3 @@
-# Need to create a window that shows 2 images, asks questions, stores answers in dataset
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -7,7 +6,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import SGDClassifier
 from sklearn.svm import SVC
-
+from sklearn import svm
 
 def trainImageData(df_dir):
     data = pd.read_csv(df_dir)
@@ -44,8 +43,7 @@ def trainImageData(df_dir):
 
 
     # Import svm model
-    from sklearn import svm
-    clf = svm.SVC(kernel='poly')  # Linear Kernel
+    clf = svm.SVC(kernel='poly')  # poly Kernel
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
     print("SVM Accuracy: "+str(accuracy_score(y_test, y_pred)))

@@ -1,11 +1,10 @@
-'''
-This file copies over images to new directory based on csv file made from bestImgPairs
-'''
-
 import pandas as pd
 from pathlib import Path
 import shutil
 
+'''
+This file copies over images to new directory based on CSV file made from 06_bestImgPairs.py.
+'''
 
 def saveBestImagePairs(data_dir, image_dir):
 

@@ -5,8 +5,15 @@ from tqdm import tqdm
 
 # Check metadata for all addresses and print status
 
+'''
+This file uses the Google Streetview api to verify each address contains a good
+ streetview perspective. It returns a list of cleaned and valid New Jersey addresses.
+'''
 
 def validate(df):
+    """
+    This function validates 300 entries given a dataframe input. Will return less than 300 locations!
+    """
     meta_base = 'https://maps.googleapis.com/maps/api/streetview/metadata?'
     api_key = open("../MapsAPI_Key.txt", "r").read()
     morris_df = df.copy().sample(300)  # 300 samples per town
@@ -29,6 +36,9 @@ def validate(df):
 
 
 def iterate_towns(df):
+    """
+    This function uses the previous function to save a list of valid locations for each town in Morris County.
+    """
     comb = pd.DataFrame()
     for town in tqdm(towns):
         ret = validate(df[df["POST_COMM"] == town])

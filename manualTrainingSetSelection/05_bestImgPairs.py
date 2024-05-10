@@ -1,8 +1,3 @@
-'''
-This file uses Tkinter to set up a gui window to allow easier manual image analysis. It gives users the options to
-search through different pairs of images, and save the ones where a change is most noticeable. Current limit is 20.
-'''
-
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -12,7 +7,16 @@ import pandas as pd
 import math
 import numpy as np
 
+'''
+This file uses Tkinter to set up a gui window to allow easier manual image analysis. It gives users the options to
+search through different pairs of images, and save the ones where a change is most noticeable. Current limit is 20.
+'''
+
 def processImages(list_out_dir, img_dir, clear=False):
+    """
+    This function runs the Tkinter windows and handles the entire file objective.
+    When the window is closed, it will save a new version of the CSV with new classifications.
+    """
     df = pd.read_csv(list_out_dir)
 
     if clear:

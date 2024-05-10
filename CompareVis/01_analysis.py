@@ -5,18 +5,27 @@ import matplotlib.pyplot as plt
 import heapq
 import os
 
+'''
+This file introduces two methods to comparing two streetview image pairs on their pixel data. 
+ After the images have been processed through the semantic segmentation model, we can use the 
+ fact that the different colors represent different objects. This file outputs numerical results
+ from comparing the image two different ways: 1.) the difference in building pixels, 2.) the 
+ difference in all pixels.
+'''
 
-# All ways of exploring use the semantic segmentation model
 
-# Crop to get semantic segmentation image
 def crop_right_image(image):
-    # crop image
+    """
+    Crops image to only the right half (semantic segmentation model)
+    """
     height, width, channels = image.shape
     return image[0:height, int(width / 2):]
 
 
 def load_images_from_folder(folder):
-    # loads all image pairs in a directory and stores in images list with sample number at index 1
+    """
+    Loads all image pairs in a directory and stores in images list with sample number at index 1.
+    """
     images = []
     samples = []
     for filename1 in os.listdir(folder):
@@ -41,7 +50,9 @@ def load_images_from_folder(folder):
 
 
 def get_percent_color(image, color):
-    # returns percent of specific colored pixels of an image
+    """
+    Returns percent of specific colored pixels of an image.
+    """
     img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     total_pixels = 409600
 
@@ -66,9 +77,12 @@ def get_percent_color(image, color):
     return 0
 
 
-## Way 1: Filter out building percent of total image and get difference
+# Way 1: Filter out building percent of total image and get difference.
 def building_percent_diff(image1, image2):
-    # Takes a percent difference of building pixels from 2 images
+    """
+    This function takes a percent difference of building pixels from 2 images.
+    """
+    #
     val1 = get_percent_color(image1, "[180 120 120]")  # rgb color for buildings
     val2 = get_percent_color(image2, "[180 120 120]")
     # print(val1)
@@ -81,9 +95,11 @@ def building_percent_diff(image1, image2):
         return round(abs(val1 - val2), 2)
 
 
-# Way 2: Overlap images, take percentage of total difference between images
+# Way 2: Overlap images, take percentage of total difference between images.
 def overlap_binary_image(image1, image2):
-    # Overlaps 2 images into a black and white version representing different pixels
+    """
+    This function overlaps 2 images into a black and white version representing different pixels.
+    """
     img1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
     img2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
     h, w, _ = img1.shape  # same shape
@@ -103,7 +119,9 @@ def overlap_binary_image(image1, image2):
 
 
 def overlap_percent_diff(image1, image2):
-    # take the overall percentage of different pixels in the binary image
+    """
+    Takes the overall percentage of different pixels in the binary image.
+    """
     comb = overlap_binary_image(image1, image2)
     comb_percent_diff = get_percent_color(comb, "[0 0 0]")
     return comb_percent_diff
@@ -133,5 +151,4 @@ if __name__ == "__main__":
     df = pd.DataFrame(
         data={'img': sample_list, 'building_percent': building_percent_vals, 'overlap_percent': overlap_percent_vals})
     df.to_csv("./files/morrisNumericalAnalysis.csv", index=False)
-    #print(df.to_string(index=False))
 

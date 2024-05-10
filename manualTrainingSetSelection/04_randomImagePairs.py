@@ -1,18 +1,20 @@
+import pandas as pd
+from streetview import search_panoramas, get_panorama_meta, get_streetview
+from tqdm import tqdm
 
 '''
 Process So far
 1.) Get addresses in NJ
 2.) Get metadata for all addresses in NJ, and clean the data based on Streetview API response
-3.) Using the metadata lat and long (in this file), we are able to retrieve the oldest and newest snapshot of one location
-    Should also output csv that stores img number with dates and addresses/lat long coordinates
+3.) This file: using the metadata lat and long (in this file), we are able to retrieve the 
+    oldest and newest snapshot of one location.
 '''
 
-import pandas as pd
-from streetview import search_panoramas, get_panorama_meta, get_streetview
-from tqdm import tqdm
-
-
 def save_image_pair(lat, lon, dir, sample):
+    """
+    This function obtain streetview images by coordinate request and save it to a
+    specific directory location. It will save as both a PNG and JPEG.
+    """
     panos = search_panoramas(lat=lat, lon=lon)
 
     cleaned_panos = [panos[i] for i, x in enumerate([x.date for x in panos], 0) if
@@ -47,11 +49,15 @@ def save_image_pair(lat, lon, dir, sample):
 
 
 def get_sample_size(df, N, dir):
+    """
+    This function will save a certain amount of image pairs using the previous function.
+    It will also save a CSV containing image pair information.
+    """
     check = False
     shuffled_df = df.sample(frac=1).reset_index(drop=True)
     img_index = 0
     save_df = pd.DataFrame(columns=['imgs', 'pano_id', 'lat', 'long', 'address', 'dates'])
-    # Some samples will fail
+    # Some samples will fail, so we need to try again
     for i in tqdm(range(N)):
         one_sample = pd.DataFrame()
         dates = []

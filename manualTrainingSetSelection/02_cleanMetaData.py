@@ -2,6 +2,12 @@ import pandas as pd
 import requests
 from tqdm import tqdm
 
+
+'''
+This file uses the Google Streetview api to verify each address contains a good
+ streetview perspective. It returns a list of cleaned and valid New Jersey addresses.
+'''
+
 nj_data = pd.read_csv("./csv/nj_address_list.csv")
 
 # Check metadata for all addresses and print status
@@ -27,7 +33,6 @@ meta_df = pd.DataFrame({'pano_id': meta_resp_id,'status': meta_resp_status, 'lat
 cleaned_meta_df = meta_df[meta_df["pano_id"].notnull()].reset_index(drop=True).drop_duplicates()
 # drop bad status AND duplicates to reduce error in finding good addresses
 
-#meta_df.to_csv("./csv/nj_meta_df.csv", index=False,)
 cleaned_meta_df.to_csv("./csv/cleaned_nj_meta_df.csv", index=False)
 
 print("Done")

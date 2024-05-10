@@ -8,7 +8,15 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.svm import SVC
 from sklearn import svm
 
+'''
+This file trains, fits, and returns the accuracy of multiple models
+ to determine the optimal model for detecting change in streetview imagery. 
+'''
+
 def trainImageData(df_dir):
+    """
+    Trains and prints accuracy for various models
+    """
     data = pd.read_csv(df_dir)
 
     y = data['change']  # Labels
@@ -59,4 +67,4 @@ if __name__ == "__main__":
     # SGDC Accuracy: 0.9
     # SVM Accuracy: 0.95
 
-    # Going with KNN for binary Classifcation with average score of 0.85
+    # Going with KNN for binary classification with average score of 0.85

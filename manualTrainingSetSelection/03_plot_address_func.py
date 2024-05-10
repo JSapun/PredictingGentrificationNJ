@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 from shapely.geometry import Point
 from pyproj import CRS
 
+'''
+This file simply plots all the verified addresses in New Jersey. It uses a Shapefile of New Jersey from NJGIN.
+'''
+
 def geo_plot_lat_lon(df, lat, lon, shapepath, savepath, title=None):
     """
     This functions uses the matplot lib to geo plot (lat,lon) pairs onto a given shapefile.

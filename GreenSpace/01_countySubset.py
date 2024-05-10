@@ -1,6 +1,11 @@
 import geopandas as gpd
 import fiona
 
+'''
+This file subsets the initial Green space data retrieved from Trust from for Public Land by Morris County.
+As the dataset is extremely large, a smaller version is desired for repeated exploration
+'''
+
 def save_new_files(county: str):
     """
     This function simply opens the main source file and outputs a smaller version

@@ -3,9 +3,18 @@ import numpy as np
 from streetview import search_panoramas, get_streetview
 from tqdm import tqdm
 
+'''
+This file uses the metadata lat and long (in this file) from the previous script, to retrieve the 
+ oldest and newest snapshot of one location. This file generates a given sample (20) of valid image 
+ pairs for each town in Morris County.
+'''
 
 # Get image pairs, a sample of 20 per each town in Morris County
 def save_image_pair(lat, lon, dir, sample):
+    """
+    This function obtain streetview images by coordinate request and save it to a
+    specific directory location. It will save as both a PNG and JPEG.
+    """
     panos = search_panoramas(lat=lat, lon=lon)
 
     cleaned_panos = [panos[i] for i, x in enumerate([x.date for x in panos], 0) if
@@ -40,6 +49,10 @@ def save_image_pair(lat, lon, dir, sample):
 
 
 def get_sample_size(df, towns, N, dir):
+    """
+    This function will iterate through town subsets to save a given sample (20) of image pairs
+    using the previous function. It will also save a CSV containing image pair information.
+    """
     save_df = pd.DataFrame(columns=['imgs', 'pano_id', 'town', 'lat', 'long', 'address', 'dates'])
     running_sum = 0
     running_img_index = 0

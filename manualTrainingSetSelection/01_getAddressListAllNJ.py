@@ -1,6 +1,12 @@
 import numpy as np
 import geopandas as gpd
 
+'''
+This file reads all the addresses in the dataset retrieved fom NJGIN and returns
+ a cleaned list with a new address column. Unfortunately, we cannot subset the
+ number of addresses here because we have to make sure they are valid addresses later.
+'''
+
 req_cols = ['FULLADDR','POST_CODE','POST_COMM','COUNTY','PLACE_TYPE','PLACEMENT','LONG_', 'LAT']
 
 data = gpd.read_file('../Data/Addr_NG911.gdb', include_fields=req_cols) # 5m 51s for full df
@@ -22,6 +28,3 @@ nj_address_list = df[["PLACE_TYPE","ADDRESS","LONG_","LAT"]]
 nj_address_list.to_csv('./csv/nj_address_list.csv', index=False)
 
 print("Done")
-
-# Unfortuntely, we cannot subset the number of addresses here because we have to make sure they are valid addresses,
-# therefore, we would need backups if they fail. We shall export entire sets instead.

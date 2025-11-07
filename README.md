@@ -1,6 +1,7 @@
 # Predicting Neighborhood Gentrification in New Jersey
 
 [**Final Research Paper (Bard College, 2024)**](https://justinsapun.com/pages/documents/UndergraduateThesis.pdf)
+
 [**Website Landing Page**](https://justinsapun.com/pages/sub_interests/predicting_gentrification.html)
 
 ![Morris County Visual Change Prediction](https://github.com/JSapun/PredictingGentrificationNJ/blob/main/Figures/SemanticSegmentationExample.png)
